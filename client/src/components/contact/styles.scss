@@ -1,0 +1,37 @@
+.contact {
+  background-color: #1f1e1d;
+  color: white;
+  height: 70%;
+}
+
+.contactDetail {
+  width: 50%;
+}
+.detailcontainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.contactform {
+  width: 50%;
+}
+
+[title="Name"],
+[title="Email"],
+[title="Message"] {
+  color: whitesmoke !important;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+  background-color: #f5f5f5 !important;
+  border-radius: 0.5rem !important;
+
+  &:hover,
+  &:focus {
+    border-color: #f84525 !important;
+  }
+}
