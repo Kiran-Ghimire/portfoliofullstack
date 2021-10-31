@@ -5,12 +5,19 @@ const UserInfo = require("../models/userInfo");
 
 const router = express.Router();
 
-const DIR = "../client/src/images/person";
+const DIR1 = "../client/src/images/person";
+const DIR2 = "../client/src/images";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    console.log(file);
-    cb(null, DIR);
+    if(file.fieldname === "photo"){
+      cb(null, DIR1);
+    }else{
+      cb(null, DIR2)
+    }
+    
+    
+    
   },
   filename: (req, file, cb) => {
     cb(
@@ -31,8 +38,8 @@ router.get("/admin/:id", (req, res) => {
 });
 
 router.post("/admin", upload.single("photo"), (req, res) => {
-  
-
+  console.log(req.body.projects);
+  // const arr= [];
   const userInfo = new UserInfo({
     fullname: req.body.fullname,
     description: req.body.description,
@@ -44,13 +51,16 @@ router.post("/admin", upload.single("photo"), (req, res) => {
     email: req.body.email,
     phone: req.body.phone,
     address: req.body.address,
+    projects: req.body.projects,
+
   });
-  console.log("body", req.body);
+  // console.log(userInfo)
+;  // console.log("body", req.body.projects);
   userInfo
     .save()
     .then((result) => {
       res.json({ result: result });
-    })
+    }) 
     .catch((err) => {
       console.log(err);
     });

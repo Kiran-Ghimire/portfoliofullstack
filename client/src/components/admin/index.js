@@ -15,6 +15,7 @@ import {
   Checkbox,
   Row,
   Col,
+  Modal
 } from "antd";
 import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
 import {
@@ -27,6 +28,7 @@ import {
 } from "react-icons/di";
 import { Link , useHistory } from "react-router-dom";
 import { AiFillHtml5 } from "react-icons/ai";
+import ProjectInput from "./projectInput"
 const { Option } = Select;
 
 const prefixSelector = (
@@ -42,8 +44,23 @@ const prefixSelector = (
 );
 
 const Admin = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
   let history = useHistory();
-  const [id, setId] = React.useState([]);
+  // const [id, setId] = React.useState([]);
+  const [project,setProject] = React.useState([]);
   const [file, setFile] = useState();
   const [image, setImage] = useState();
 
@@ -64,6 +81,8 @@ const Admin = () => {
   };
 
   const onFinish = (values) => {
+    console.log(values)
+    console.log(project)
     let data = new FormData();
     data.append("fullname", values.fullname);
     data.append("description", values.description);
@@ -76,21 +95,33 @@ const Admin = () => {
     data.append("email", values.email);
     data.append("phone", values.phone);
     data.append("address", values.address);
+    data.append("projects", JSON.stringify(project))
+         
+    // project.forEach((value) => { data.append('projects[]', value)});
+    // data.append("projectname", project);
+    // data.append("project", project.projectphoto);
+    console.log("project",project)
     console.log("values", values)
     axios
-      .post("/admin", data, {
+      .post("/admin", data,    {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       })
       .then((res) => {
-        setId(res.data.result._id);
+        
+        
         console.log("ID", res);
+        
         if(res.data.result._id) 
         {history.push(`/portfolio/${res.data.result._id}`)}
-      })
+       })
       .catch((errors) => console.log(errors));
   };
+
+
+
+  
   const handleUpload = (file) => {
     setImage(file);
   };
@@ -164,30 +195,7 @@ const Admin = () => {
         >
           <Input />
         </Form.Item>
-        <Form.Item label="Date" style={{ marginBottom: 0 }}>
-          <Form.Item
-            help="Please select the starting date"
-            style={{ display: "inline-block", width: "calc(50% - 12px)" }}
-          >
-            <DatePicker />
-          </Form.Item>
-          <span
-            style={{
-              display: "inline-block",
-              width: "24px",
-              lineHeight: "32px",
-              textAlign: "center",
-            }}
-          >
-            -
-          </span>
-          <Form.Item
-            style={{ display: "inline-block", width: "calc(50% - 12px)" }}
-            help="Please select the ending date"
-          >
-            <DatePicker />
-          </Form.Item>
-        </Form.Item>
+        
         <Form.Item
           label="Highschool"
           name="highschool"
@@ -195,30 +203,7 @@ const Admin = () => {
         >
           <Input />
         </Form.Item>
-        <Form.Item label="Date" style={{ marginBottom: 0 }}>
-          <Form.Item
-            help="Please select the starting date"
-            style={{ display: "inline-block", width: "calc(50% - 12px)" }}
-          >
-            <DatePicker />
-          </Form.Item>
-          <span
-            style={{
-              display: "inline-block",
-              width: "24px",
-              lineHeight: "32px",
-              textAlign: "center",
-            }}
-          >
-            -
-          </span>
-          <Form.Item
-            style={{ display: "inline-block", width: "calc(50% - 12px)" }}
-            help="Please select the ending date"
-          >
-            <DatePicker />
-          </Form.Item>
-        </Form.Item>
+        
         <Form.Item
           label="School"
           name="school"
@@ -226,30 +211,7 @@ const Admin = () => {
         >
           <Input />
         </Form.Item>
-        <Form.Item label="Date" style={{ marginBottom: 0 }}>
-          <Form.Item
-            help="Please select the starting date"
-            style={{ display: "inline-block", width: "calc(50% - 12px)" }}
-          >
-            <DatePicker />
-          </Form.Item>
-          <span
-            style={{
-              display: "inline-block",
-              width: "24px",
-              lineHeight: "32px",
-              textAlign: "center",
-            }}
-          >
-            -
-          </span>
-          <Form.Item
-            style={{ display: "inline-block", width: "calc(50% - 12px)" }}
-            help="Please select the ending date"
-          >
-            <DatePicker />
-          </Form.Item>
-        </Form.Item>
+        
         <Form.Item
           name="expertise"
           label="Top Expertise"
@@ -330,6 +292,9 @@ const Admin = () => {
             </Row>
           </Checkbox.Group>
         </Form.Item>
+        <Button style={{marginBottom: "5px", marginRight: "100px"}} type="primary" onClick={showModal}>
+        Add Projects
+      </Button>
         <Form.Item
           name="email"
           label="E-mail"
@@ -369,12 +334,17 @@ const Admin = () => {
           rules={[{ required: true, message: "Please input your address!" }]}
         >
           <Input />
+        </Form.Item> 
+            
+        <Form.Item>
+          <Button htmlType="submit" style={{marginBottom: "10px", marginLeft: "400px"}}>Submit</Button>
         </Form.Item>
 
-        <Form.Item>
-          <Button htmlType="submit">Submit</Button>
-        </Form.Item>
       </Form>
+      <Modal   width= "1000px" title="Add projects" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+      <ProjectInput project={project} setProject={setProject} />
+      </Modal>
+      
     </div>
   );
 };

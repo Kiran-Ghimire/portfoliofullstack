@@ -33,10 +33,11 @@ const userSchema = new Schema(
     address: {
       type: String,
     },
+    projects: [  {type:String} ]
   },
-  { timestamps: true }
+  { timestamps: true } 
 );
 
 const UserInfo = mongoose.model("UserInfo", userSchema);
 
-module.exports = UserInfo;
+module.exports = UserInfo; 

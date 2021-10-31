@@ -13,27 +13,9 @@ import axios from "axios";
 function App() {
 
   const [value, setValue] = React.useState([]);
-  const [project, setProject]= React.useState([]);
+  
   const [response, setResponse]= React.useState([]);
-//   React.useEffect(() => {
-    
-//     getUserInfo();
 
-// }, []);        
-
-  
-//   const getUserInfo = () => {
-//     axios.get("/admin")
-//     .then((res) => {const userInfo = res.data.result;
-//       console.log(res);
-//       setValue(userInfo); 
-    
-//     })
-
-//     .catch((err) => console.log(err));
-//   }
-  
-//   console.log(value);
   return (
     <BrowserRouter>
       <div>
@@ -47,13 +29,9 @@ function App() {
 
         <Route path="/" exact>
           <Admin />
+          
         </Route>
-        <Route path="/admin/projects">
-          <ProjectInput  />
-        </Route>
-        {/* <Route path="/admin" exact>
         
-        </Route> */}
       </div>
     </BrowserRouter>
   );

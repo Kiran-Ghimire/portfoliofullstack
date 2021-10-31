@@ -28,12 +28,12 @@ const Education = ({value, setValue}) => {
     .then((res) => {const userInfo = res.data.result;
       //console.log(res);
       setValue(userInfo); 
-      console.log(userInfo)
+      console.log("education", userInfo)
     })
 
     .catch((err) => console.log(err));
     
-  }
+  } 
   
   return (
     <div className="container education">
@@ -54,18 +54,10 @@ const Education = ({value, setValue}) => {
       </Timeline>
       <div className="top_expertise">
         <h1 style={{ marginBottom: "50px" }}>TOP EXPERTISE</h1>
-        {console.log(value.expertise)}
+        
          <div className="skills">
-          {/* <DiReact />
-          <DiNodejs />
           
-          <DiJava />
-          <DiJavascript1 />
-          <AiFillHtml5 />
-           */}
-           
-          {/* {value.expertise.map(i => i === "css"? <DiCss3 /> : i==="sql"?<DiMysql /> : <> </>)} */}
-          { value.expertise}
+          { value?.expertise?.split(",").map(i => i === "react"? <DiReact /> : i === "javascript"?<DiJavascript1  /> :  i === "node" ? <DiNodejs /> : i === "java" ? <DiJava />: i === "html" ? <AiFillHtml5 />: i === "css" ? <DiCss3 /> : i === "sql" ? <DiMysql />: "")}
           
         </div> 
       </div>
@@ -74,3 +66,4 @@ const Education = ({value, setValue}) => {
 };
 
 export default Education;
+
