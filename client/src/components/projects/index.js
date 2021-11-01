@@ -37,7 +37,7 @@ const Projects = ({value, setValue}) => {
       <Col sm={8}>
           <Card
             hoverable
-            style={{ width: 240 }}
+            style={{ width: 240 }} 
             // cover={
             //   <img
             //     alt="example"
