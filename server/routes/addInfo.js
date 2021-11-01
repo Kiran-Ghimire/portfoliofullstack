@@ -5,16 +5,14 @@ const UserInfo = require("../models/userInfo");
 
 const router = express.Router();
 
-const DIR1 = "../client/src/images/person";
-const DIR2 = "../client/src/images";
+const DIR1 = "./images";
+
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    if(file.fieldname === "photo"){
+    
       cb(null, DIR1);
-    }else{
-      cb(null, DIR2)
-    }
+    
     
     
     

@@ -68,7 +68,7 @@ const Intro = ({value, setValue}) => {
           height="400"
           width="300"
           style={{ objectFit: "cover" }}
-          // src={`http://localhost:8888/admin/${value.photo}`}
+          src={`http://localhost:8888/${value.photo}`}
         />
       </div>
     </div>

@@ -28,7 +28,7 @@ const Projects = ({value, setValue}) => {
     })
     .catch((err) => console.log(err));
   }
-   const parseData= JSON.parse(value.projects);
+   const parseData= JSON.parse(value.projects[0]);
   return (
 
     <div className="container">
@@ -54,7 +54,7 @@ const Projects = ({value, setValue}) => {
               return(
                 <>
                 <div>{e.projectname} </div>
-                
+                <div>{e.projectdescription}</div>
                 {/* <Meta title={value.projectname} description={value.projectdescription}/> */}
                 </>
               )
