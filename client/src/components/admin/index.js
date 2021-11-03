@@ -193,7 +193,7 @@ const Admin = () => {
           name="college"
           rules={[{ required: true, message: "College name is required!" }]}
         >
-          <Input />
+          <Input  autocomplete="off"/>
         </Form.Item>
         
         <Form.Item
@@ -201,7 +201,7 @@ const Admin = () => {
           name="highschool"
           rules={[{ required: true, message: "Highschool name is required!" }]}
         >
-          <Input />
+          <Input autocomplete="off"/>
         </Form.Item>
         
         <Form.Item
@@ -209,7 +209,7 @@ const Admin = () => {
           name="school"
           rules={[{ required: true, message: "School name is required!" }]}
         >
-          <Input />
+          <Input autocomplete="off" />
         </Form.Item>
         
         <Form.Item

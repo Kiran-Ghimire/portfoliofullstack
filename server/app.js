@@ -23,8 +23,8 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "http://localhost:8888", 
-    
+    origin: "*", 
+    methods: ['GET','POST'],
     credentials: true, 
   })
 ); 

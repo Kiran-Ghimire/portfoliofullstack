@@ -14,7 +14,7 @@ const Projects = ({value, setValue}) => {
     getUserInfo();
     console.log("hereValue", value);
 
-}, []);
+}, []); 
 
   const getUserInfo = () => {
     axios.get(`/admin/${id}`)
@@ -47,7 +47,7 @@ const Projects = ({value, setValue}) => {
           >
             
             {
-            value.projects[0].length !== 0 &&
+            parseData.length !== 0 &&
             
             parseData.map((e) => {
               console.log(e);

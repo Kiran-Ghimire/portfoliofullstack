@@ -38,10 +38,11 @@ router.get("/admin/:id", (req, res) => {
 router.post("/admin", upload.single("photo"), (req, res) => {
   console.log(req.body.projects);
   // const arr= [];
+  console.log("photorender", req.file)
   const userInfo = new UserInfo({
     fullname: req.body.fullname,
     description: req.body.description,
-    photo: req.file.path,
+    photo: req.file.filename,
     college: req.body.college,
     highschool: req.body.highschool,
     school: req.body.school,
